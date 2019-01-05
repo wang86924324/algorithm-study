@@ -10,10 +10,10 @@
 
 
 Heap Wiki
-https://en.wikipedia.org/wiki/Heap_(data_structure)
-各种堆的效率：
-1.find-min的时间复杂度是o(1)
-2.Fibbonacci堆效率最好，处理del-min之外其他的效率都是o(1)
+https://en.wikipedia.org/wiki/Heap_(data_structure)  
+各种堆的效率  
+1.find-min的时间复杂度是o(1)  
+2.Fibbonacci堆效率最好，处理del-min之外其他的效率都是o(1)  
 
 练习：  
 1. https://leetcode.com/problems/kth-largest-element-in-a-stream/  
