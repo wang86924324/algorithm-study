@@ -7,11 +7,11 @@ public class KLargest_703 {
         int k = 3;
         int[] arr = new int[]{4, 5, 8, 2};
         KthLargest kthLargest = new KthLargest(3, arr);
-        kthLargest.add(3);   // returns 4
-        kthLargest.add(5);   // returns 5
-        kthLargest.add(10);  // returns 5
-        kthLargest.add(9);   // returns 8
-        kthLargest.add(4);   // returns 8
+        System.out.println(kthLargest.add(3));   // returns 4
+        System.out.println(kthLargest.add(5));   // returns 5
+        System.out.println(kthLargest.add(10));  // returns 5
+        System.out.println(kthLargest.add(9));   // returns 8
+        System.out.println(kthLargest.add(4));   // returns 8
     }
 
     /**
@@ -26,6 +26,7 @@ public class KLargest_703 {
         int k;
 
         public KthLargest(int k, int[] nums) {
+            this.k = k;
             priorityQueue = new PriorityQueue<Integer>(k);
             for (int i = 0; i < nums.length; i++) {
                 add(nums[i]);
@@ -33,14 +34,15 @@ public class KLargest_703 {
         }
 
         public int add(int val) {
-            if(priorityQueue.size()< k){
+            if (priorityQueue.size() < k) {
                 priorityQueue.add(val);
-            }
-            else if (priorityQueue.peek() < val) {
+            } else if (priorityQueue.peek() < val) {
                 priorityQueue.remove();
                 priorityQueue.add(val);
             }
             return priorityQueue.peek();
         }
     }
+
+
 }
