@@ -55,3 +55,54 @@ treeMap有序。
 # Pre-order  根左右
 # in-order  左根右
 # Post-order  左右根
+
+
+## 广度优先搜索和深度优先搜索
+广度优先搜索：按层次搜索，通过队列来实现,代码模板
+```python
+def BFS(root):
+var queue=[]
+    queue.append([root])
+    
+    while queue：
+      node = queue.pop();
+      visited.add(node);
+      
+      process(node)
+      nodes = generate_related_nodes(node)
+      queue.push(nodes)
+      
+      #other processwork
+```
+深度优先搜索：优先深度，然后回溯到上一个节点。    
+递归代码模板  
+```python
+def DFS(root,visited):
+  visited.add(root)
+  # process current node here
+  ...
+  for next_node in node.children():
+    if not next_node in visited:
+      dfs(next_node,visited)
+```
+
+
+非递归代码模板  
+```python
+def DFS(root):
+  if root is none:
+    return []
+  
+  visited,stack = [],[root]
+  
+  while stack:
+    node = stack.pop()
+    visited.add(node)
+    
+    process(node)
+    
+    nodes = generate_related_nodes(node)
+    stack.push(nodes)
+    
+    # other process work
+```
