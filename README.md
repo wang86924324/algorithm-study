@@ -10,10 +10,10 @@
 
 
 Heap Wiki
-https://en.wikipedia.org/wiki/Heap_(data_structure)
-各种堆的效率：
-1.find-min的时间复杂度是o(1)
-2.Fibbonacci堆效率最好，处理del-min之外其他的效率都是o(1)
+https://en.wikipedia.org/wiki/Heap_(data_structure)  
+各种堆的效率  
+1.find-min的时间复杂度是o(1)  
+2.Fibbonacci堆效率最好，处理del-min之外其他的效率都是o(1)  
 
 练习：  
 1. https://leetcode.com/problems/kth-largest-element-in-a-stream/  
@@ -22,3 +22,87 @@ https://en.wikipedia.org/wiki/Heap_(data_structure)
 2.我们只需要最大或者最小元素，数组加排序有点大材小用，我们可以用Min Heap来存储这个元素，我们记得Fibbonacci堆的存储和find-min的效率是o（1）,n个元素，那么时间负责度即是o(N)  
 
 编码实现：待续。。。
+
+## 哈希表
+Hash函数：取模是一种常见的hash函数。  
+Hash碰撞：Hash表存储数据过程：首先利用hash函数计算存储在数组中的位置，不同的元素通过hash函数可能计算出来的位置是一样的，那么数组中的每一个位置就不能只存储一个元素，这个位置一般存储链表或者红黑树等数据结构。  
+
+List：可以存储重复元素，插入o(1)，查找o(n)   
+Map:
+Set:实现方hash表或者数据，查找o(1)
+
+HashMap vs TreeMap  
+HashSet vs TreeSet  
+查找时间复杂度：o(1)->o(logN)
+treeMap有序。
+
+练习：
+见项目
+
+## 树
+相关概念：  
+树：  
+  层：距离Root节点的距离  
+  ParentNode LeftNode RightNode Siblings 左子树 右子树  
+二叉树：每一个节点最多有两个子节点。    
+完全二叉树：所有的节点都有两个节点。
+二叉搜索树：  
+1. 左子树所有节点小于根节点的值
+2. 右子树所有的节点大约根节点
+依次递归。
+
+## 二叉树遍历
+# Pre-order  根左右
+# in-order  左根右
+# Post-order  左右根
+
+
+## 广度优先搜索和深度优先搜索
+广度优先搜索：按层次搜索，通过队列来实现,代码模板
+```python
+def BFS(root):
+var queue=[]
+    queue.append([root])
+    
+    while queue：
+      node = queue.pop();
+      visited.add(node);
+      
+      process(node)
+      nodes = generate_related_nodes(node)
+      queue.push(nodes)
+      
+      #other processwork
+```
+深度优先搜索：优先深度，然后回溯到上一个节点。    
+递归代码模板  
+```python
+def DFS(root,visited):
+  visited.add(root)
+  # process current node here
+  ...
+  for next_node in node.children():
+    if not next_node in visited:
+      dfs(next_node,visited)
+```
+
+
+非递归代码模板  
+```python
+def DFS(root):
+  if root is none:
+    return []
+  
+  visited,stack = [],[root]
+  
+  while stack:
+    node = stack.pop()
+    visited.add(node)
+    
+    process(node)
+    
+    nodes = generate_related_nodes(node)
+    stack.push(nodes)
+    
+    # other process work
+```
