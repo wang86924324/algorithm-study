@@ -31,7 +31,16 @@ public class Solution236 {
         return left == null ? right : (right == null ? left : root);
     }
 
+    public TreeNode commonAncestor_2(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || p == root || q == root) {
+            return root;
+        }
 
+        TreeNode left = commonAncestor(root.left, p, q);
+        TreeNode right = commonAncestor(root.right, p, q);
+
+        return left == null ? right : (right == null ? left : root);
+    }
 
 
 }

@@ -18,21 +18,6 @@ import java.util.*;
  */
 public class SlideWindow_239 {
 
-    public static void main(String[] args) {
-        SlideWindow_239 slideWindow_239 = new SlideWindow_239();
-        //int[] nums = new int[]{7, 3, 5, 4, 2};
-        int[] nums = new int[]{7, 5, 9, 8};
-       /* printIntArray(slideWindow_239.maxSlidingWindow(nums, 3));
-        System.out.println("-----------------");
-        printIntArray(slideWindow_239.maxSlidingWindow2(nums,3));
-        System.out.println("-----------------");*/
-        //printIntArray(slideWindow_239.maxSlidingWindow3(nums, 10));
-
-        printIntArray(slideWindow_239.maxSlidingWindow_repeat(nums, 10));
-
-        printIntArray(slideWindow_239.maxSlidingWindow3_Repeat(nums, 10));
-
-    }
 
     static void printIntArray(int[] array) {
         if (array == null || array.length == 0) {
@@ -70,6 +55,33 @@ public class SlideWindow_239 {
 
     }
 
+    public int[] maxSlidingWindow_repeat5(int[] nums, int k) {
+        // check
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
+
+        int[] result = new int[Math.max(nums.length - k + 1, 1)];
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        for (int i = 0; i < nums.length; i++) {
+            if (i < k) {
+                maxHeap.add(nums[i]);
+            } else {
+                maxHeap.poll();
+                maxHeap.add(nums[i]);
+            }
+
+            if (i >= k - 1) {
+                result[i - k + 1] = maxHeap.peek();
+            }
+            if (nums.length == 1) {
+                result[0] = maxHeap.peek();
+            }
+        }
+
+        return result;
+    }
+
     public int[] maxSlidingWindow_repeat(int[] nums, int k) {
         // check
         if (nums == null || nums.length == 0) {
@@ -79,12 +91,7 @@ public class SlideWindow_239 {
         int[] result = new int[Math.max(nums.length - k + 1, 1)];
 
         // 创建Max Heap
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        });
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((o1, o2) -> o2 - o1);
 
         for (int i = 0; i < nums.length; i++) {
             if (i < k) {
@@ -194,5 +201,69 @@ public class SlideWindow_239 {
             result[0] = nums[window.peek()];
         }
         return result;
+    }
+
+
+    public Integer[] maxSlidingWindow4_Repeat(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return new Integer[0];
+        }
+
+        // 存储索引
+        Deque<Integer> window = new LinkedList<>();
+
+        // 存储值
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            // 窗口越界，移除左边节点
+            if (i >= k) {
+                window.removeFirst();
+            }
+
+            // 比当前节点小的节点需要移除窗口
+            while (nums[window.peekFirst()] < nums[i])
+                window.removeFirst();
+
+            ((LinkedList<Integer>) window).add(i);
+            if (i >= k) {
+                result.add(window.peekFirst());
+            }
+        }
+
+
+        Integer[] a = result.toArray(new Integer[0]);
+        return a;
+    }
+
+
+    public int[] maxSlidingWindow5_Repeat(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || nums.length < k) {
+            return new int[0];
+        }
+
+        LinkedList<Integer> window = new LinkedList<>();
+        int[] result = new int[nums.length - k + 1];
+        int resultIndex = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (!window.isEmpty() && window.peek() < i - k + 1) {
+                window.poll();
+            }
+            while (!window.isEmpty() && nums[window.peekFirst()] < nums[i]) {
+                window.pollLast();
+            }
+            window.add(i);
+            if (i >= k - 1) {
+                result[resultIndex++] = nums[window.peek()];
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        SlideWindow_239 slideWindow_239 = new SlideWindow_239();
+        int[] nums = new int[]{1, 3, -1, -3, 5, 3, 6, 7};
+
+        printIntArray(slideWindow_239.maxSlidingWindow5_Repeat(nums, 3));
+
     }
 }
