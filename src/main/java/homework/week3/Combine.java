@@ -29,10 +29,31 @@ import java.util.List;
  * 2.BFS
  */
 public class Combine {
+//    public List<List<Integer>> combine(int n, int k) {
+//        List<List<Integer>> res = new ArrayList<>();
+//        List<Integer> path = new ArrayList<>();
+//        dfs(n, k, 1, path, res);
+//        return res;
+//    }
+//
+//    private void dfs(int n, int k, int start, List<Integer> path, List<List<Integer>> res) {
+//        if (path.size() == k) {
+//            res.add(new ArrayList<>(path));
+//            return;
+//        }
+//        for (int i = start; i <= n; i++) {
+//            if (path.contains(i)) continue;
+//            path.add(i);
+//            dfs(n, k, i + 1, path, res);
+//            path.remove(path.size() - 1);
+//        }
+//    }
+
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> path = new ArrayList<>();
-        dfs(n, k, 1, path, res);
+        int start = 1;
+        dfs(n, k, start, path, res);
         return res;
     }
 
@@ -41,8 +62,8 @@ public class Combine {
             res.add(new ArrayList<>(path));
             return;
         }
+
         for (int i = start; i <= n; i++) {
-            if (path.contains(i)) continue;
             path.add(i);
             dfs(n, k, i + 1, path, res);
             path.remove(path.size() - 1);

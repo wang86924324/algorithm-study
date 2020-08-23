@@ -25,32 +25,27 @@ public class Permute {
     // DFS
     // BFS
     public List<List<Integer>> permute(int[] nums) {
-        if (nums == null) return new ArrayList<>();
         List<List<Integer>> res = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
         boolean[] hasVisited = new boolean[nums.length];
-        dfs(nums, hasVisited, new ArrayList<Integer>(), res);
+        dfs(nums,hasVisited, path, res);
         return res;
     }
 
-    private void dfs(int[] nums, boolean[] hasVisited, ArrayList<Integer> path, List<List<Integer>> res) {
+    private void dfs(int[] nums,boolean[] hasVisited, List<Integer> path, List<List<Integer>> res) {
         if (path.size() == nums.length) {
             res.add(new ArrayList<>(path));
             return;
         }
 
-
         for (int i = 0; i < nums.length; i++) {
             if (hasVisited[i]) continue;
-            // current logic
+
+            hasVisited[i]=true;
             path.add(nums[i]);
-            hasVisited[i] = true;
-
-            // drill down
-            dfs(nums, hasVisited, path, res);
-
-            // reverse states
+            dfs(nums,hasVisited, path, res);
             path.remove(path.size() - 1);
-            hasVisited[i] = false;
+            hasVisited[i]=false;
         }
     }
 
