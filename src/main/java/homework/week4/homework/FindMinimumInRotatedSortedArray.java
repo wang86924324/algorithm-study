@@ -27,18 +27,20 @@ package homework.week4.homework;
  */
 public class FindMinimumInRotatedSortedArray {
 
+    // 找到有半边
     public int findMin(int[] nums) {
-        if (nums.length == 1) return nums[0];
-
-        int left = 0, right = nums.length - 1;
-        while (left <= right) {
-            if (nums[left] <= nums[right]) return nums[left];
-
-            int mid = left + (right - left) / 2;
-            if (nums[left] <= nums[mid]) left = mid + 1;
-            else right = mid - 1;
+        if(nums == null){
+            return 0;
         }
-
-        return -1;
+        int left = 0, right = nums.length - 1;
+        while(left < right){//考虑终止条件
+            int mid = left + (right-left) / 2;
+            if(nums[mid] > nums[right]){
+                left = mid + 1;// +1是因为mid一定不会是最小值
+            }else{
+                right = mid;
+            }
+        }
+        return nums[left];
     }
 }

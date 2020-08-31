@@ -13,6 +13,9 @@ public class EveryDay {
 
     private TreeNode buildTree(ListNode left, ListNode right) {
         if (left == right) {
+            // 数学归纳法 1 2 3 null的话，第一层选择2 第二层左节点(1,2)，右边节点(2,3,null)需要把1和3給查询出来
+            // 先看第二层的左节点（1,2）需要返回节点1，（1,2）的mid是1，作为2的左节点。
+            // mid为1的左右区间为，（1,1）(2,2)应该返回null。
             return null;
         }
 
@@ -32,5 +35,12 @@ public class EveryDay {
             fast = fast.next.next;
         }
         return slow;
+    }
+
+    public static void main(String[] args) {
+        ListNode first =new ListNode(1);
+        first.next=new ListNode(2);
+        first.next.next=new ListNode(3);
+        new EveryDay().sortedListToBST(first);
     }
 }

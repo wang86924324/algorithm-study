@@ -42,7 +42,6 @@ public class LeetCode33 {
                 } else {
                     left = mid + 1;
                 }
-
             }
             // 右半边有序
             else {
