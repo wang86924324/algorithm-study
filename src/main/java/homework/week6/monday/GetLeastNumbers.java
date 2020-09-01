@@ -35,21 +35,39 @@ public class GetLeastNumbers {
         return Arrays.copyOfRange(nums, 0, k);
     }
 
+//    private void quickSelect(int[] nums, int start, int end, int k) {
+//        if (start == end) return;
+//        int pivot = nums[start];
+//        int i = start, j = end;
+//        while (i <= j) {
+//            while (i <= j && nums[i] < pivot) i++;
+//            while (i <= j && nums[j] > pivot) j--;
+//            if (i <= j) swap(nums, i, j);
+//        }
+//
+//        // 二分递归，只会走一遍。
+//        if (k <= j) quickSelect(nums, start, j, k);
+//        if (k >= i) quickSelect(nums, i, end, k);
+//
+//    }
+
     private void quickSelect(int[] nums, int start, int end, int k) {
         if (start == end) return;
+
+        // partition
         int pivot = nums[start];
         int i = start, j = end;
         while (i <= j) {
             while (i <= j && nums[i] < pivot) i++;
-            while (i <= j && nums[j] > pivot) j--;
+            while (i <= j && nums[j] > pivot) j++;
             if (i <= j) swap(nums, i, j);
         }
 
-        // 二分递归，只会走一遍。
         if (k <= j) quickSelect(nums, start, j, k);
         if (k >= i) quickSelect(nums, i, end, k);
 
     }
+
 
     private void swap(int[] nums, int i, int j) {
 
