@@ -51,10 +51,11 @@ import java.util.Arrays;
  * 所以压缩公式为dp[j]=dp[j-1](当前行)+dp[j]（上一行）==》dp[j]+=dp[j-1]
  */
 public class UniquePaths {
+    // dp[j]+=dp[j-1]   初始化：第一行和第一列都是1
     public int uniquePaths(int m, int n) {
         int[] dp=new int[n];
         Arrays.fill(dp,1);
-        for (int i = 0; i < m; i++) for (int j = 0; j < n; j++){
+        for(int i=1;i<m;i++) for (int j=1;j<n;j++){
             dp[j]+=dp[j-1];
         }
         return dp[n-1];

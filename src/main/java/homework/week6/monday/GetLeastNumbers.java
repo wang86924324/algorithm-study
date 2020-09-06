@@ -31,8 +31,25 @@ import java.util.Arrays;
  */
 public class GetLeastNumbers {
     public int[] getLeastNumbers(int[] nums, int k) {
-        quickSelect(nums, 0, nums.length - 1, k - 1);
+        int start = 0;
+        int end = nums.length - 1;
+        quickSelect(nums, start, end, k);
         return Arrays.copyOfRange(nums, 0, k);
+    }
+
+    private void quickSelect(int[] nums, int start, int end, int k) {
+        // partition
+        int pivot = nums[start];
+        int left = start, right = end;
+        while (left <= right) {
+            while (left <= right && nums[left] < pivot) left++;
+            while (left <= right && nums[right] > pivot) right--;
+            swap(nums, left, right);
+        }
+
+        // k在左边
+        if (k <= right) quickSelect(nums, start, right, k);
+        if (k >= left) quickSelect(nums, left, end, k);
     }
 
 //    private void quickSelect(int[] nums, int start, int end, int k) {
@@ -51,22 +68,22 @@ public class GetLeastNumbers {
 //
 //    }
 
-    private void quickSelect(int[] nums, int start, int end, int k) {
-        if (start == end) return;
-
-        // partition
-        int pivot = nums[start];
-        int i = start, j = end;
-        while (i <= j) {
-            while (i <= j && nums[i] < pivot) i++;
-            while (i <= j && nums[j] > pivot) j++;
-            if (i <= j) swap(nums, i, j);
-        }
-
-        if (k <= j) quickSelect(nums, start, j, k);
-        if (k >= i) quickSelect(nums, i, end, k);
-
-    }
+//    private void quickSelect(int[] nums, int start, int end, int k) {
+//        if (start == end) return;
+//
+//        // partition
+//        int pivot = nums[start];
+//        int i = start, j = end;
+//        while (i <= j) {
+//            while (i <= j && nums[i] < pivot) i++;
+//            while (i <= j && nums[j] > pivot) j++;
+//            if (i <= j) swap(nums, i, j);
+//        }
+//
+//        if (k <= j) quickSelect(nums, start, j, k);
+//        if (k >= i) quickSelect(nums, i, end, k);
+//
+//    }
 
 
     private void swap(int[] nums, int i, int j) {

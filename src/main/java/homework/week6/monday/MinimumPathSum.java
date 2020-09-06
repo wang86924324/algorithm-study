@@ -71,7 +71,22 @@ public class MinimumPathSum {
 //        return dp[n-1];
 //    }
 
-
+    // 1.暴力
+    // 2.DP  dp[j]=Math.max(dp[j],dp[j-1])+grid[i][j] for i in grid.rowindexs
+    public int minPathSum(int[][] grid) {
+        if (grid.length == 0) return 0;
+        int m = grid.length, n = grid[0].length;
+        int[] dp = new int[n];
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++) {
+                // j==0 不做任何处理;i==0|| 上一个元素大于当前元素，更新当前元素
+                if (j > 0 && (i == 0 || dp[j - 1] < dp[j])) {
+                    dp[j] = dp[j - 1];
+                }
+                dp[j] += grid[i][j];
+            }
+        return dp[n - 1];
+    }
 
 
 }
